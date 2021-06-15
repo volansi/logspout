@@ -1,5 +1,5 @@
-FROM balenalib/genericx86-64-ext-alpine:3.12-run
-# FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-node:12-run
+# FROM balenalib/genericx86-64-ext-alpine:3.12-run
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-node:12-run
 
 COPY ./start.sh /bin/start.sh
 
