@@ -1,0 +1,15 @@
+FROM balenalib/genericx86-64-ext-alpine:3.12-run
+# FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-node:12-run
+
+COPY ./start.sh /bin/start.sh
+
+ENTRYPOINT ["/bin/start.sh"]
+VOLUME /mnt/routes
+EXPOSE 80
+
+COPY . /src
+RUN cd /src && ./build.sh "$(cat VERSION)"
+
+ONBUILD COPY ./build.sh /src/build.sh
+ONBUILD COPY ./modules.go /src/modules.go
+ONBUILD RUN cd /src && chmod +x ./build.sh && sleep 1 && sync && ./build.sh "$(cat VERSION)-custom"
